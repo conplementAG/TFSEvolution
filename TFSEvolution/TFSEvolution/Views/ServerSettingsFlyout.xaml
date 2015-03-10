@@ -1,0 +1,63 @@
+﻿<SettingsFlyout
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:TFSExpert.Converters"
+    x:Class="TFSExpert.Views.ServerSettingsFlyout"
+    mc:Ignorable="d"
+    Title="Service Url"
+    d:DesignWidth="346">
+
+	<SettingsFlyout.Resources>
+		<converters:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverter"/>
+		<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+	</SettingsFlyout.Resources>
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+	<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+
+		<!-- The StackPanel(s) below define individual content sections -->
+
+		<!-- Content Section 1-->
+		<StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+
+			<!-- Section 1 header -->
+			<TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,25"  Text="TFS Evolution Service URL" />
+
+			<!-- Section 1 body -->
+			<TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,5" TextWrapping="Wrap">
+				<TextBlock.Text>You need to configure a custom TFS service url to access all features of this app.</TextBlock.Text>
+			</TextBlock>
+			<TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
+				<TextBlock.Text>You can use a predefined service url or your own service.</TextBlock.Text>
+			</TextBlock>
+			<ToggleSwitch Margin="-6,0,0,0" Header = "Use own service url" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsOn="{Binding IsOwnServiceConfigured, Mode=TwoWay}" Toggled="ToggleSwitch_OnToggled"/>
+			<TextBlock Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Service url:" />
+			<TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap" Text="{Binding ServiceUrl}" FontWeight="SemiBold" Visibility="{Binding IsEditMode, Converter={StaticResource ReverseBooleanToVisibilityConverter}}" />
+            <HyperlinkButton Visibility="{Binding ShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Right" Command="{Binding SwitchToEdit}" Content="Edit" Margin="0,0,-3,0" Grid.Column="1" Grid.Row="1" Foreground="{StaticResource PBIBrush}" />
+		    <Grid Visibility="{Binding IsEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,5,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="https://" Margin="0,0,5,0" />
+				<TextBox Text="{Binding NewServiceUrl, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" BorderBrush="#B3B6B6B6" />
+				<StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,-4,0">	
+					<HyperlinkButton HorizontalAlignment="Right" Command="{Binding ChangeServiceUrl}" Content="OK" Foreground="{StaticResource PBIBrush}" />
+					<HyperlinkButton HorizontalAlignment="Right" Command="{Binding CancelEdit}" Content="Cancel" Foreground="{StaticResource PBIBrush}" />					
+				</StackPanel>
+				<ProgressRing Visibility="{Binding IsChecking, Converter={StaticResource BooleanToVisibilityConverter}}" IsActive="true" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,10,0" Foreground="{StaticResource PBIBrush}"/>
+				
+			</Grid>
+			<TextBlock Visibility="{Binding IsError, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="The url you entered is not working!" Margin="0,0,5,0" Foreground="{StaticResource BugBrush}" FontWeight="Bold" FontSize="13.333" />
+		</StackPanel>
+
+		<!-- Define more Content Sections below as necessary -->
+
+	</StackPanel>
+</SettingsFlyout>

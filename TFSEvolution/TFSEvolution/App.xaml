@@ -1,0 +1,33 @@
+﻿<Application
+    x:Class="TFSExpert.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:common="using:TFSExpert.Common">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Misc/Resources.xaml"/>
+                <ResourceDictionary Source="Misc/StandardStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Application-specific resources -->
+
+            <x:String x:Key="AppName">TFS Evolution</x:String>
+
+            <common:EventTemplateSelector x:Key="EventTemplateSelector"
+             BuildSuccessTemplate="{StaticResource TemplateEventBuildSuccess}"
+             BuildFailedTemplate="{StaticResource TemplateEventBuildFailed}"
+             BuildStoppedTemplate="{StaticResource TemplateEventBuildStopped}"
+             BuildPartiallyTemplate="{StaticResource TemplateEventBuildPartially}"
+             BuildDefaultTemplate="{StaticResource TemplateEventBuildDefault}"
+			 CheckinTemplate="{StaticResource TemplateEventCheckin}"
+            />
+
+            <common:ProjectTemplateSelector x:Key="ProjectTemplateSelector"
+                                            Template="{StaticResource ProjectItemTemplate}"
+            />
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

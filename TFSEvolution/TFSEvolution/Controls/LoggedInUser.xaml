@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="TFSExpert.Controls.LoggedInUser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:TFSExpert.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="140"
+    d:DesignWidth="400" Background="Transparent" >
+    <UserControl.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </UserControl.Resources>
+    <Button Margin="0,25,50,25" Visibility="{Binding Path=IsUserLoaded, Converter={StaticResource BoolToVisConverter}}" BorderBrush="{x:Null}" >
+        <Button.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Images/ProjectBackDarkBlue.png"/>
+        </Button.Background>
+        <Button.Flyout>
+            <MenuFlyout Placement="Left">
+                <MenuFlyoutItem Text="Logout" DataContext="" Click="OnLogoutClicked" />
+            </MenuFlyout>
+        </Button.Flyout>
+        <StackPanel  Orientation="Horizontal" >
+            <Border Width="70" Height="70" CornerRadius="150">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding LoggedInUser.Name, Converter={StaticResource AssignedToToUserpicSourceConverter}}"/>
+                </Border.Background>
+            </Border>
+            <StackPanel Margin="15,10,0,0">
+                <TextBlock FontFamily="{StaticResource TechnicalFont}" FontSize="20" Text="{Binding LoggedInUser.Name}" Margin="0,5,0,5"/>
+                <TextBlock FontFamily="{StaticResource TechnicalFont}" FontSize="13.333" Text="{Binding LoggedInUser.Mail}"/>
+            </StackPanel>
+        </StackPanel>
+    </Button>
+</UserControl>

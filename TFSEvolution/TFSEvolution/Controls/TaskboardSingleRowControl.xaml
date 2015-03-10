@@ -1,0 +1,62 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TFSExpert"
+	xmlns:customs="using:TFSExpert.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="TFSExpert.TaskboardSingleRowControl"
+    mc:Ignorable="d"
+    d:DesignHeight="459.5"
+    d:DesignWidth="956.675" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderThickness="0">
+    
+	<Border MinWidth="1920" BorderThickness="0,0,0,2" BorderBrush="{StaticResource DarkBlueBrush}" Padding="0,0,0,5">
+    
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+			<local:SinglePBIControl HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+			<customs:VariableGridView Grid.Column="1" BorderBrush="{StaticResource DarkGreyBrush}" BorderThickness="2,0" ItemsSource="{Binding ChildsTodo}" CanDragItems="True" AllowDrop="True" ItemTemplate="{StaticResource TaskboardTaskTemplate}" SelectionMode="None" IsSwipeEnabled="True" Drop="ToDoContainer_Drop" DragItemsStarting="ToDoContainer_DragItemsStarting" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanReorderItems="True">
+				<customs:VariableGridView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<VariableSizedWrapGrid VerticalAlignment="Top"
+							ItemHeight="25"
+							ItemWidth="25" Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left"
+                                           />
+					</ItemsPanelTemplate>
+                 
+				</customs:VariableGridView.ItemsPanel>
+			</customs:VariableGridView>
+			<customs:VariableGridView Grid.Column="2" BorderBrush="{StaticResource DarkGreyBrush}" BorderThickness="0,0,2,0" ItemsSource="{Binding ChildsInWork}" AllowDrop="True" CanDragItems="True" ItemTemplate="{StaticResource TaskboardTaskTemplate}" SelectionMode="None" IsSwipeEnabled="True" Drop="ProgressContainer_Drop" DragItemsStarting="ProgressContainer_DragItemsStarting" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Left">
+		 
+				<customs:VariableGridView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<VariableSizedWrapGrid VerticalAlignment="Center"
+							ItemHeight="25"
+							ItemWidth="25" Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left"
+                                           />
+					</ItemsPanelTemplate>
+                 
+				</customs:VariableGridView.ItemsPanel>
+			</customs:VariableGridView>
+			<customs:VariableGridView Grid.Column="3" BorderBrush="{StaticResource DarkGreyBrush}" BorderThickness="0,0,2,0" ItemsSource="{Binding ChildsDone}" AllowDrop="True" CanDragItems="True" ItemTemplate="{StaticResource TaskboardTaskTemplate}" SelectionMode="None" IsSwipeEnabled="True" Drop="DoneContainer_Drop" DragItemsStarting="ProgressContainer_DragItemsStarting" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+		 
+				<customs:VariableGridView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<VariableSizedWrapGrid VerticalAlignment="Center"
+							ItemHeight="15"
+							ItemWidth="15" Orientation="Horizontal" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left"
+                                           />
+					</ItemsPanelTemplate>
+                 
+				</customs:VariableGridView.ItemsPanel>
+			</customs:VariableGridView>
+
+		</Grid>
+	</Border>
+</UserControl>

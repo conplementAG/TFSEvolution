@@ -1,0 +1,32 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="TFSExpert.Controls.TaskboardWorkItem"
+    mc:Ignorable="d"
+    d:DesignHeight="401"
+    d:DesignWidth="400">
+
+    <Viewbox>
+
+        <Grid Height="400" Width="400">
+            <Ellipse Fill="{Binding WorkItemType, Converter={StaticResource StateToBrushConverter}}" Stroke="White" StrokeThickness="5"/>
+            <Grid Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Ellipse Fill="{StaticResource DarkGreyBrush}" Stroke="{Binding WorkItemType, Converter={StaticResource StateToBrushConverter}}" Width="120" Height="120" HorizontalAlignment="Right" VerticalAlignment="Top" StrokeThickness="4"/>
+                <Border Height="110" Width="110" CornerRadius="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding AssignedTo, Converter={StaticResource AssignedToToUserpicSourceConverter}}" />
+                    </Border.Background>
+                </Border>
+            </Grid>
+            <Grid Margin="44,79,41,86">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding ID}" FontSize="29.333" FontFamily="{StaticResource TechnicalFont}" Padding="0" Margin="0,5,0,0"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Title}" FontSize="29.333" FontFamily="{StaticResource TechnicalFont}" Margin="0,50,0,0" FontWeight="Bold" MaxHeight="110" TextTrimming="WordEllipsis"/>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding WorkRemaining}" FontSize="96" FontFamily="{StaticResource TechnicalFont}" Margin="5,110,5,0" FontWeight="Bold" MaxHeight="110" TextTrimming="WordEllipsis" Foreground="{StaticResource DarkGreyBrush}"/>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding AssignedTo}" FontSize="29.333" FontFamily="{StaticResource TechnicalFont}" Margin="0,0,15,-15" FontWeight="Bold" MaxHeight="110" TextTrimming="WordEllipsis" Foreground="{StaticResource DarkGreyBrush}"/>
+            </Grid>
+
+        </Grid>
+    </Viewbox>
+</UserControl>

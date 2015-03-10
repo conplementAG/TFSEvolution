@@ -1,0 +1,6 @@
+@using TFSWebService.Website.Areas.HelpPage.ModelDescriptions
+@model TFSWebService.Website.Areas.HelpPage.ModelDescriptions.CollectionModelDescription
+@if (Model.ElementDescription is ComplexTypeModelDescription)
+{
+    @Html.DisplayFor(m => m.ElementDescription)
+}
